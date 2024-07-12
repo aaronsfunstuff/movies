@@ -1,0 +1,71 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f7ee; /* Soft pastel green background */
+    text-align: center;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff; /* White container background */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #3d6c63; /* Darker green header color */
+}
+
+.search {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search input[type="text"] {
+    padding: 10px;
+    width: 60%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #d8f3dc; /* Light pastel green background */
+    margin-right: 10px; /* Space between input and button */
+}
+
+.search button {
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Main button color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.search button:hover {
+    background-color: #45a049; /* Darker shade on hover */
+}
+
+.movies {
+    text-align: left;
+}
+
+.movie {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #d8f3dc; /* Light pastel green background for movie boxes */
+}
+
+.movie h2 {
+    margin-top: 0;
+    color: #3d6c63; /* Darker green title color */
+}
+
+.movie p {
+    margin-bottom: 5px;
+    color: #333; /* Dark text color */
+}
