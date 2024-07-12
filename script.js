@@ -1,5 +1,8 @@
-const apiKey = '1c8b3468'; // Replace with your actual API key
+const apiKey = '1c8b3468'; 
 const apiUrl = 'https://www.omdbapi.com/';
+
+let currentPage = 1;
+const itemsPerPage = 10; 
 
 function searchMovies() {
     const searchInput = document.getElementById('searchInput').value.trim();
@@ -8,12 +11,13 @@ function searchMovies() {
         return;
     }
 
-    const url = `${apiUrl}?apikey=${apiKey}&s=${searchInput}`;
+    const url = `${apiUrl}?apikey=${apiKey}&s=${searchInput}&page=${currentPage}`;
 
     fetch(url)
         .then(response => response.json())
         .then(data => {
             displayMovies(data.Search);
+            setupPagination(data.totalResults);
         })
         .catch(error => {
             console.error('Error fetching data:', error);
@@ -47,3 +51,20 @@ function displayMovies(movies) {
         moviesList.innerHTML = '<p>No movies found.</p>';
     }
 }
+
+function setupPagination(totalResults) {
+    const totalPages = Math.ceil(totalResults / itemsPerPage);
+    const paginationElement = document.getElementById('pagination');
+    paginationElement.innerHTML = '';
+
+    for (let i = 1; i <= totalPages; i++) {
+        const button = document.createElement('button');
+        button.innerText = i;
+        button.addEventListener('click', () => {
+            currentPage = i;
+            searchMovies();
+        });
+        paginationElement.appendChild(button);
+    }
+}
+
