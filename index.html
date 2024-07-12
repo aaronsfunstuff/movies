@@ -9,18 +9,30 @@
 <body>
     <div class="container">
         <h1>Online Movie Database</h1>
+
         <div class="search">
             <input type="text" id="searchInput" placeholder="Search for a movie...">
             <button onclick="searchMovies()">Search</button>
         </div>
+
+        <!-- Recommended Movies Section -->
+        <div class="recommended-movies">
+            <h2>Recommended Movies</h2>
+            <div id="recommendedMoviesList" class="movies">
+                <!-- Recommended movies -->
+            </div>
+        </div>
+
         <div id="moviesList" class="movies">
             <!-- Movie results -->
         </div>
+
         <div id="pagination" class="pagination">
-            <!-- Pagination  -->
+            <!-- Pagination -->
         </div>
     </div>
     <script src="script.js"></script>
 </body>
 </html>
+
 
