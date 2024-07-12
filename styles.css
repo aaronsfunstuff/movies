@@ -69,3 +69,22 @@ h1 {
     margin-bottom: 5px;
     color: #333; /* Dark text color */
 }
+
+.pagination {
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 8px 16px;
+    background-color: #4CAF50; /* Main button color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+.pagination button:hover {
+    background-color: #45a049; /* Darker shade on hover */
+}
