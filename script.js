@@ -50,7 +50,6 @@ function searchMovies() {
 
     const url = `${apiUrl}?apikey=${apiKey}&s=${searchInput}`;
 
-    // Clear recommended movies list
     const recommendedMoviesList = document.getElementById('recommendedMoviesList');
     recommendedMoviesList.innerHTML = '';
 
@@ -173,7 +172,7 @@ function addToWatchlist(movie) {
 }
 
 function setupPagination(totalResults, searchInput) {
-    const totalPages = Math.ceil(totalResults / 10); // 10 items per page
+    const totalPages = Math.ceil(totalResults / 10); 
     const paginationElement = document.getElementById('pagination');
     paginationElement.innerHTML = '';
 
@@ -187,5 +186,4 @@ function setupPagination(totalResults, searchInput) {
         paginationElement.appendChild(button);
     }
 }
-
 
