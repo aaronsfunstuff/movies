@@ -1,4 +1,4 @@
-const apiKey = '1c8b3468'; // Replace with your actual API key
+const apiKey = '1c8b3468'; 
 const apiUrl = 'https://www.omdbapi.com/';
 
 const recommendedMovies = [
@@ -8,6 +8,8 @@ const recommendedMovies = [
     'tt0468569', // The Dark Knight
     'tt0167260'  // The Lord of the Rings: The Return of the King
 ];
+
+let watchlist = [];
 
 window.onload = function() {
     displayRecommendedMovies();
@@ -26,10 +28,11 @@ function displayRecommendedMovies() {
                     Title: data.Title,
                     Year: data.Year,
                     imdbID: data.imdbID,
-                    Poster: data.Poster
+                    Poster: data.Poster,
+                    Rating: data.imdbRating
                 };
 
-                const movieElement = createMovieElement(movie);
+                const movieElement = createMovieElement(movie, true);
                 recommendedMoviesList.appendChild(movieElement);
             })
             .catch(error => {
@@ -55,7 +58,7 @@ function searchMovies() {
         .then(response => response.json())
         .then(data => {
             displayMovies(data.Search);
-            setupPagination(data.totalResults);
+            setupPagination(data.totalResults, searchInput);
         })
         .catch(error => {
             console.error('Error fetching data:', error);
@@ -69,29 +72,108 @@ function displayMovies(movies) {
 
     if (movies) {
         movies.forEach(movie => {
-            const movieElement = createMovieElement(movie);
-            moviesList.appendChild(movieElement);
+            const url = `${apiUrl}?apikey=${apiKey}&i=${movie.imdbID}`;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const movieDetails = {
+                        Title: data.Title,
+                        Year: data.Year,
+                        imdbID: data.imdbID,
+                        Poster: data.Poster,
+                        Rating: data.imdbRating,
+                        Plot: data.Plot,
+                        Genre: data.Genre,
+                        Director: data.Director,
+                        Actors: data.Actors
+                    };
+
+                    const movieElement = createMovieElement(movieDetails, false);
+                    moviesList.appendChild(movieElement);
+                })
+                .catch(error => {
+                    console.error('Error fetching movie details:', error);
+                });
         });
     } else {
         moviesList.innerHTML = '<p>No movies found.</p>';
     }
 }
 
-function createMovieElement(movie) {
+function createMovieElement(movie, isRecommended) {
     const movieElement = document.createElement('div');
     movieElement.classList.add('movie');
+    movieElement.dataset.imdbID = movie.imdbID;
 
     movieElement.innerHTML = `
         <h2>${movie.Title} (${movie.Year})</h2>
-        <p><strong>IMDB ID:</strong> ${movie.imdbID}</p>
+        <p><strong>Rating:</strong> ${movie.Rating}</p>
         <img src="${movie.Poster}" alt="${movie.Title} poster" width="150">
+        <button onclick="showMovieDetails('${movie.imdbID}')">View Details</button>
     `;
+
+    if (isRecommended) {
+        const addToWatchlistButton = document.createElement('button');
+        addToWatchlistButton.innerText = 'Add to Watchlist';
+        addToWatchlistButton.addEventListener('click', () => addToWatchlist(movie));
+        movieElement.appendChild(addToWatchlistButton);
+    }
 
     return movieElement;
 }
 
-function setupPagination(totalResults) {
-    const totalPages = Math.ceil(totalResults / 10); 
+function showMovieDetails(imdbID) {
+    const url = `${apiUrl}?apikey=${apiKey}&i=${imdbID}`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            const movieDetails = {
+                Title: data.Title,
+                Year: data.Year,
+                Rated: data.Rated,
+                Released: data.Released,
+                Runtime: data.Runtime,
+                Genre: data.Genre,
+                Director: data.Director,
+                Actors: data.Actors,
+                Plot: data.Plot,
+                Poster: data.Poster,
+                imdbRating: data.imdbRating
+            };
+
+            displayMovieModal(movieDetails);
+        })
+        .catch(error => {
+            console.error('Error fetching movie details:', error);
+        });
+}
+
+function displayMovieModal(movie) {
+    alert(`
+        Title: ${movie.Title} (${movie.Year})
+        Rated: ${movie.Rated}
+        Released: ${movie.Released}
+        Runtime: ${movie.Runtime}
+        Genre: ${movie.Genre}
+        Director: ${movie.Director}
+        Actors: ${movie.Actors}
+        Rating: ${movie.imdbRating}
+        Plot: ${movie.Plot}
+    `);
+}
+
+function addToWatchlist(movie) {
+    if (!watchlist.some(item => item.imdbID === movie.imdbID)) {
+        watchlist.push(movie);
+        alert(`"${movie.Title}" added to your watchlist.`);
+    } else {
+        alert(`"${movie.Title}" is already in your watchlist.`);
+    }
+}
+
+function setupPagination(totalResults, searchInput) {
+    const totalPages = Math.ceil(totalResults / 10); // 10 items per page
     const paginationElement = document.getElementById('pagination');
     paginationElement.innerHTML = '';
 
@@ -100,7 +182,7 @@ function setupPagination(totalResults) {
         button.innerText = i;
         button.addEventListener('click', () => {
             currentPage = i;
-            searchMovies();
+            searchMovies(searchInput);
         });
         paginationElement.appendChild(button);
     }
