@@ -8,29 +8,42 @@
 </head>
 <body>
     <div class="container">
-        <h1>Online Movie Database</h1>
-
-        <div class="search">
-            <input type="text" id="searchInput" placeholder="Search for a movie...">
-            <button onclick="searchMovies()">Search</button>
-        </div>
-
-        <!-- Recommended Movies Section -->
-        <div class="recommended-movies">
-            <h2>Recommended Movies</h2>
-            <div id="recommendedMoviesList" class="movies">
-                <!-- Recommended movies -->
+        <header>
+            <h1>Online Movie Database</h1>
+            <div class="search">
+                <input type="text" id="searchInput" placeholder="Search for a movie...">
+                <button onclick="searchMovies()">Search</button>
             </div>
-        </div>
+        </header>
 
-        <div id="moviesList" class="movies">
-            <!-- Movie results -->
-        </div>
+        <main>
+            <!-- Recommended Movies Section -->
+            <section class="recommended-movies">
+                <h2>Recommended Movies</h2>
+                <div id="recommendedMoviesList" class="movies">
+                    <!-- Recommended movies will be displayed here -->
+                </div>
+            </section>
 
-        <div id="pagination" class="pagination">
-            <!-- Pagination -->
+            <!-- Movies List Section -->
+            <section id="moviesList" class="movies">
+                <!-- Movie results will be displayed here -->
+            </section>
+
+            <!-- Pagination Section -->
+            <div id="pagination" class="pagination">
+                <!-- Pagination controls will be added here dynamically -->
+            </div>
+        </main>
+    </div>
+
+    <div id="movieModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalContent"></div>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
