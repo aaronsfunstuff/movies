@@ -1,90 +1,192 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f7ee; /* Soft pastel green background */
-    text-align: center;
+    background-color: #d4e6d4; 
+    color: #333;
+    margin: 0;
+    padding: 0;
 }
 
 .container {
-    max-width: 800px;
+    width: 80%;
     margin: 0 auto;
     padding: 20px;
-    background-color: #ffffff; /* White container background */
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-    color: #3d6c63; /* Darker green header color */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    color: #2f4f4f;
 }
 
 .search {
-    margin-bottom: 20px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    margin-top: 10px;
 }
 
-.search input[type="text"] {
+.search input {
+    width: 300px;
     padding: 10px;
-    width: 60%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: #d8f3dc; /* Light pastel green background */
-    margin-right: 10px; /* Space between input and button */
+    border: 1px solid #ddd;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    background-color: #f0f8f0; 
+}
+
+.search button {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-left: none;
+    border-radius: 0 5px 5px 0;
+    background-color: #8fbc8f;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+}
+
+.search button:hover {
+    background-color: #72a072;
+}
+
+main {
+    margin-top: 20px;
+}
+
+section h2 {
+    color: #2f4f4f;
+}
+
+.movies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.movie {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    text-align: center;
+}
+
+.movie img {
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.movie h2 {
+    font-size: 18px;
+    color: #2f4f4f;
+}
+
+.movie p {
+    font-size: 14px;
+    color: #555;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+
+
+.pagination button:hover {
+    background-color: #72a072;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #8fbc8f;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    outline: none;
+}
+
+button:hover,
+button:focus {
+    background-color: #72a072;
 }
 
 .search button {
     padding: 10px 20px;
-    background-color: #4CAF50; /* Main button color */
-    color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 0 5px 5px 0;
+    background-color: #8fbc8f;
+    color: #fff;
     cursor: pointer;
-    font-size: 16px;
+    transition: background-color 0.3s ease;
+    outline: none;
 }
 
-.search button:hover {
-    background-color: #45a049; /* Darker shade on hover */
+.search button:hover,
+.search button:focus {
+    background-color: #72a072;
 }
 
-.movies {
-    text-align: left;
-}
-
-.movie {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #d8f3dc; /* Light pastel green background for movie boxes */
-}
-
-.movie h2 {
-    margin-top: 0;
-    color: #3d6c63; /* Darker green title color */
-}
-
-.movie p {
-    margin-bottom: 5px;
-    color: #333; /* Dark text color */
-}
-
-.pagination {
-    margin-top: 20px;
-}
 
 .pagination button {
-    padding: 8px 16px;
-    background-color: #4CAF50; /* Main button color */
-    color: white;
-    border: none;
-    border-radius: 4px;
+    padding: 10px;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #8fbc8f;
+    color: #fff;
     cursor: pointer;
-    font-size: 14px;
-    margin-right: 5px;
+    transition: background-color 0.3s ease;
 }
 
-.pagination button:hover {
-    background-color: #45a049; /* Darker shade on hover */
+.pagination button:hover,
+.pagination button:focus {
+    background-color: #72a072;
+    border-color: #72a072;
 }
